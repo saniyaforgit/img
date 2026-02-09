@@ -1,0 +1,23 @@
+class Rogue(Character):
+    def __init__(self, name):
+        super().__init__(name, 90, 25)
+        self.energy = 100
+
+    def attack(self, target):
+        target.take_damage(self.damage)
+
+    def backstab(self, target):
+        if self.energy < 30:
+            return
+
+        self.energy -= 30
+        target.take_damage(self.damage * 2)
+
+    def restore_energy(self, amount): 
+        if amount < 0:
+            return
+
+        self.energy += amount
+
+        if self.energy > 100:
+            self.energy = 100
